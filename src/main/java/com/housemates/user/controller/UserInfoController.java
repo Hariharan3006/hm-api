@@ -38,7 +38,7 @@ public class UserInfoController
 	@RequestMapping(value="/signup",method= RequestMethod.POST)
 	public String postUserDetails(@RequestBody UserDetails userDetails)
 	{
-		return userinfodao.insertUserDetails(userDetails);	
+		return userinfodao.insertUserDetails(userDetails,filePath);	
 	}
 	@RequestMapping(value="/uploadimage",method= RequestMethod.POST)
 	public String postImage(@RequestParam("file") MultipartFile file)
@@ -65,7 +65,7 @@ public class UserInfoController
 				
 				
 			}
-			return file.getOriginalFilename();
+			return filePath;
 				
 	}
 }

@@ -35,7 +35,7 @@ public class UserInfoDAO
 		}
 		
 	}
-	public String insertUserDetails(UserDetails userDetails)
+	public String insertUserDetails(UserDetails userDetails,String filePath)
 	{
 		try
 		{
@@ -44,7 +44,7 @@ public class UserInfoDAO
 			if(userInfo.getUserName().isEmpty())
 			{
 				String sql="insert into t_user_info (phoneNo,userName,password,IDProofNumber,IdProof,nativeCity,image,emailId,createdDate) values(?,?,?,?,?,?,?,?,CURDATE())";
-				jdbcTemplate.update(sql,new Object[] {userDetails.getMobileNumber(),userDetails.getUserName(),userDetails.getPassword(),userDetails.getIdProofNumber(),userDetails.getIdProof(),userDetails.getCity(),"F:\\Untitled-1",userDetails.getEmailId()});
+				jdbcTemplate.update(sql,new Object[] {userDetails.getMobileNumber(),userDetails.getUserName(),userDetails.getPassword(),userDetails.getIdProofNumber(),userDetails.getIdProof(),userDetails.getCity(),filePath,userDetails.getEmailId()});
 				return "User added Successfully";
 			}
 			else if(userInfo.getUserName().equals(userDetails.getUserName()))

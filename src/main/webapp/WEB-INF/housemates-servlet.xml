@@ -13,7 +13,10 @@
 	<bean name="bookingDAO" class="com.housemates.user.dao.UserInfoDAO">
 		<constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
-
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000" />
+	</bean>
 	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver" />
     <property name="url" value="jdbc:mysql://localhost:3306/housmatesdatabase" />
