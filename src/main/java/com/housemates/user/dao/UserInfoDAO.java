@@ -19,9 +19,9 @@ public class UserInfoDAO
 	
 	public UserInfoBean getDetails(UserCredentials userCredentials)
 	{
+		UserInfoBean userInfo=new UserInfoBean();
 		try
 		{
-			UserInfoBean userInfo=new UserInfoBean();
 			//userInfo=jdbcTemplate.queryForObject("select * from t_user_info where userName='"+userCredentials.getUserName()+"' and password='"+userCredentials.getPassword()+"'", new Object[] {}, new UserInfoRowMapper());
 			userInfo=jdbcTemplate.queryForObject("select * from t_user_info where userName=? and password=?", new Object[] {userCredentials.getUserName(),userCredentials.getPassword()}, new UserInfoRowMapper());
 			userInfo.setMetadata("Success"); 
@@ -29,7 +29,6 @@ public class UserInfoDAO
 		}
 		catch(Exception e)
 		{
-			UserInfoBean userInfo=new UserInfoBean();
 			userInfo.setMetadata("Invalid User Name or password");
 			return userInfo;
 		}
@@ -37,10 +36,9 @@ public class UserInfoDAO
 	}
 	public String insertUserDetails(UserDetails userDetails,String filePath)
 	{
+		UserInfoBean userInfo=new UserInfoBean();
 		try
 		{
-			
-			UserInfoBean userInfo=validateUser(userDetails); 
 			if(userInfo.getUserName().isEmpty())
 			{
 				String sql="insert into t_user_info (phoneNo,userName,password,IDProofNumber,IdProof,nativeCity,image,emailId,createdDate) values(?,?,?,?,?,?,?,?,CURDATE())";
@@ -65,9 +63,9 @@ public class UserInfoDAO
 	}
 	public UserInfoBean validateUser(UserDetails userDetails)
 	{
+		UserInfoBean userInfo=new UserInfoBean();
 		try
 		{
-			UserInfoBean userInfo=new UserInfoBean();
 			//userInfo=jdbcTemplate.queryForObject("select * from t_user_info where userName='"+userCredentials.getUserName()+"' and password='"+userCredentials.getPassword()+"'", new Object[] {}, new UserInfoRowMapper());
 			userInfo=jdbcTemplate.queryForObject("select * from t_user_info where userName=?", new Object[] {userDetails.getUserName()}, new UserInfoRowMapper());
 			userInfo.setMetadata("Success"); 
@@ -75,7 +73,6 @@ public class UserInfoDAO
 		}
 		catch(Exception e)
 		{
-			UserInfoBean userInfo=new UserInfoBean();
 			userInfo.setUserName("");
 			userInfo.setMetadata("Invalid User Name or password");
 			return userInfo;
